@@ -10539,8 +10539,8 @@ RectTransform:
   m_GameObject: {fileID: 777355068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 29757991}
   m_Father: {fileID: 929926376}
@@ -13148,7 +13148,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5709.983}
   m_LocalScale: {x: 50, y: 50, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 929926376}
   m_RootOrder: 3
@@ -14274,8 +14274,8 @@ RectTransform:
   m_GameObject: {fileID: 990495565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1624799519}
   m_Father: {fileID: 929926376}
@@ -14283,7 +14283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 51, y: 5}
+  m_AnchoredPosition: {x: 102, y: 5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &990495567
@@ -19628,8 +19628,8 @@ RectTransform:
   m_GameObject: {fileID: 1488637417}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 1, z: 0.01}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 2, z: 0.02}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 51671205}
   - {fileID: 1577457831}
@@ -19638,7 +19638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 5.000061}
+  m_AnchoredPosition: {x: 200, y: 5.000061}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1488637420
