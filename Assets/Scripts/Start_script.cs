@@ -7,6 +7,9 @@ public class Start_script : MonoBehaviour
 {
     public void Start_Program()
     {
-        SceneManager.LoadScene("Scene_1");
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (sceneName == "Start_Scene") SceneManager.LoadScene("Instruction_Scene");
+        if (sceneName == "Instruction_Scene") SceneManager.LoadScene("Main_Scene");
     }
 }
