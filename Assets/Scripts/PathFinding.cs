@@ -20,6 +20,8 @@ public class PathFinding : MonoBehaviour
     public List<Vector3> positions;
     public Connection_Mode_Change conmod;
 
+    public List<PathNode> path;
+
     public TMP_Text text;
 
     private void Start()
@@ -45,7 +47,7 @@ public class PathFinding : MonoBehaviour
             if (clickCount == 2)
             {
                 clicked.Add(hit.collider.gameObject.GetComponent<PathNode>());
-                List<PathNode> path = FindPath();
+                path = FindPath();
                 if (path != null)
                 {
                     lineRenderer.positionCount = path.Count;
@@ -73,7 +75,7 @@ public class PathFinding : MonoBehaviour
 
     }
 
-    private List<PathNode> FindPath()
+    public List<PathNode> FindPath()
     {
 
         PathNode startNode = clicked[0];
@@ -153,7 +155,7 @@ public class PathFinding : MonoBehaviour
         return path;
     }
 
-    private float CalculateDistanceCost(PathNode a, PathNode b)
+    public float CalculateDistanceCost(PathNode a, PathNode b)
     {
         float xDistance = Mathf.Abs(a.x - b.x);
         float yDistance = Mathf.Abs(a.y - b.y);
