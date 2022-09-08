@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Connection_data : MonoBehaviour
@@ -9,12 +10,16 @@ public class Connection_data : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public TMP_Text titleText;
     public TMP_Text dataText;
+    public Image close;
+    public Image open;
 
     public Connection_Mode_Change conmod;
     public PathFinding pathFinding;
 
+    public int counter;
     private float pathDistance;
     public Animator anim;
+    private Toggle toggle;
 
     private TMP_Text distance;
     private TMP_Text time;
@@ -28,6 +33,8 @@ public class Connection_data : MonoBehaviour
         titleText = GameObject.Find("Data Title").GetComponent<TMP_Text>();
         dataText = GameObject.Find("Data").GetComponent<TMP_Text>();
         borderSpriteRenderer = GameObject.Find("Border").GetComponent<SpriteRenderer>();
+        close = GameObject.Find("Close").GetComponent<Image>();
+        open = GameObject.Find("Data Open").GetComponent<Image>();
 
         distance = GameObject.Find("Distance").GetComponent<TMP_Text>();
         time = GameObject.Find("Time").GetComponent<TMP_Text>();
@@ -37,6 +44,8 @@ public class Connection_data : MonoBehaviour
         pathFinding = GameObject.Find("Line").GetComponent<PathFinding>();
         conmod = GameObject.Find("Connection Button").GetComponent<Connection_Mode_Change>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = gameObject.GetComponent<Animator>();
+        toggle = GetComponent<Toggle>();
 
         tmpList.Add(titleText);
         tmpList.Add(dataText);
@@ -55,12 +64,17 @@ public class Connection_data : MonoBehaviour
             for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = false;
             spriteRenderer.enabled = false;
             borderSpriteRenderer.enabled = false;
+            close.enabled = false;
+            open.enabled = false;
+
         }
         if (conmod.counter % 2 != 0)
         {
             for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = true;
             spriteRenderer.enabled = true;
             borderSpriteRenderer.enabled = true;
+            open.enabled = true;
+            close.enabled = true;   
         }
 
         if (pathFinding.path != null)
@@ -75,5 +89,18 @@ public class Connection_data : MonoBehaviour
 
             pathDistance = 0;
         }
+
+        toggle.onValueChanged.AddListener(delegate
+        {
+                userToggle(toggle);
+        });
+    }
+
+    public void userToggle(bool tog)
+    {
+        anim.SetTrigger("Active");
+        //if (counter % 2 != 0)
+        //    toggle.isOn = false;
+        //counter += 1;
     }
 }

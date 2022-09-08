@@ -12,7 +12,7 @@ public class PathFinding : MonoBehaviour
 
     public List<GameObject> sites;
 
-    private int clickCount;
+    public int clickCount;
     public List<PathNode> clicked;
 
     public LineRenderer lineRenderer;
@@ -35,7 +35,7 @@ public class PathFinding : MonoBehaviour
     private void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider && Input.GetMouseButtonDown(0) && conmod.counter % 2 != 0)
+        if (hit.collider && Input.GetMouseButtonDown(0) && conmod.counter % 2 != 0&& hit.collider.gameObject.tag == "site")
         {
             clickCount++;
             if (clickCount == 1)
