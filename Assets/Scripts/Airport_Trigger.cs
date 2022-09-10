@@ -49,14 +49,16 @@ public class Airport_Trigger : MonoBehaviour
         if (conmod.counter % 2 != 0 && counter % 2 != 0)
         {
             onoff.isOn = false;
-            counter += 1;
-        }
-
-        if (onoff.isOn == false)
-        {
             childInfo.back.sortingOrder = 2;
             childInfo.text.canvas.sortingOrder = 3;
         }
+        counter += 1;
+
+        //if (onoff.isOn == false)
+        //{
+        //    childInfo.back.sortingOrder = 2;
+        //    childInfo.text.canvas.sortingOrder = 3;
+        //}
     }
 
 }

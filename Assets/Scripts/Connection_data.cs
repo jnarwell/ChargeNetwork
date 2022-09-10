@@ -99,8 +99,7 @@ public class Connection_data : MonoBehaviour
     public void userToggle(bool tog)
     {
         anim.SetTrigger("Active");
-        //if (counter % 2 != 0)
-        //    toggle.isOn = false;
-        //counter += 1;
+        if (counter % 2 != 0) toggle.isOn = false;
+        counter += 1;
     }
 }
