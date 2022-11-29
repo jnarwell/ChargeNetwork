@@ -41,7 +41,7 @@ public class Connection_data : MonoBehaviour
         cost = GameObject.Find("Cost").GetComponent<TMP_Text>();
         stops = GameObject.Find("Stops").GetComponent<TMP_Text>();
 
-        pathFinding = GameObject.Find("Line").GetComponent<PathFinding>();
+        pathFinding = GameObject.Find("PathFinding").GetComponent<PathFinding>();
         conmod = GameObject.Find("Connection Button").GetComponent<Connection_Mode_Change>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
