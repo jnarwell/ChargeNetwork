@@ -1504,7 +1504,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.3
+  orthographic size: 5.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1528,7 +1528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63681193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.86, z: -10}
+  m_LocalPosition: {x: 0.67, y: -0.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63681193}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e9c6a3b2821e42a585cb1567df39247, type: 3}
   m_Name: 
@@ -8235,7 +8235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527513940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10126.078}
+  m_LocalPosition: {x: 0, y: 0, z: -10000}
   m_LocalScale: {x: 107.99998, y: 107.99998, z: 107.99998}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8357,7 +8357,6 @@ MonoBehaviour:
   clicked: []
   lineRenderer: {fileID: 527513942}
   positions: []
-  conmod: {fileID: 1488637424}
   path: []
   text: {fileID: 930811267}
 --- !u!1 &532322177
@@ -11199,7 +11198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &777355069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15158,7 +15157,6 @@ MonoBehaviour:
   clicked: []
   lineRenderer: {fileID: 527513942}
   positions: []
-  conmod: {fileID: 1488637424}
   path: []
   text: {fileID: 930811267}
 --- !u!4 &966984351
@@ -15194,7 +15192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &990495566
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20655,7 +20653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1488637418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20723,7 +20721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488637417}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -22729,8 +22727,8 @@ RectTransform:
   m_GameObject: {fileID: 1653714436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10105}
-  m_LocalScale: {x: 410, y: 300, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 200, y: 146.34146, z: 0.4878049}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1459634454}
   - {fileID: 1552374875}
@@ -22741,7 +22739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215, y: -155}
+  m_AnchoredPosition: {x: 1709, y: -1037}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1653714438
@@ -22814,7 +22812,6 @@ MonoBehaviour:
   dataText: {fileID: 0}
   close: {fileID: 0}
   open: {fileID: 0}
-  conmod: {fileID: 0}
   pathFinding: {fileID: 0}
   counter: 0
   anim: {fileID: 0}

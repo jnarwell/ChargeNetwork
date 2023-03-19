@@ -27,7 +27,7 @@ public class ALIA_Move : MonoBehaviour
         else
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider && Input.GetMouseButtonDown(0) && hit.collider.gameObject.tag == "site" && pathFind.conmod.counter % 2 != 0)
+            if (hit.collider && Input.GetMouseButtonDown(0) && hit.collider.gameObject.tag == "site") // took out &&pathFind.conmod.counter
             {
                 clickCount++;
                 if (clickCount == 1)
@@ -62,7 +62,7 @@ public class ALIA_Move : MonoBehaviour
                     clickCount = 0;
                 }
             }
-            if (pathFind.conmod.counter % 2 == 0) alia.enabled = false;
+            //if (pathFind.conmod.counter % 2 == 0) alia.enabled = false; <--- for recent reboot
         }
     }
     IEnumerator Move()

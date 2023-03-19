@@ -18,11 +18,15 @@ public class PathFinding : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public List<Vector3> positions;
-    public Connection_Mode_Change conmod;
+    //public Connection_Mode_Change conmod;
 
     public List<PathNode> path;
 
     public TMP_Text text;
+
+    float doubleClickTime = .2f, lastClickTime;
+    bool doubleClick;
+
 
     private void Start()
     {
@@ -33,11 +37,32 @@ public class PathFinding : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            float timeSinceLastClick = Time.time - lastClickTime;
+
+            if (timeSinceLastClick <= doubleClickTime)
+            {
+                Debug.Log("Double click");
+                doubleClick = true;
+            }
+            else
+            {
+                Debug.Log("Normal click");
+                //doubleClick = false;
+            }
+
+            lastClickTime = Time.time;
+        }
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider && Input.GetMouseButtonDown(0) && conmod.counter % 2 != 0&& hit.collider.gameObject.tag == "site")
+        if (hit.collider && doubleClick && hit.collider.gameObject.tag == "site")
         {
             if (GameObject.Find("ALIA")) Debug.Log("ALIA Exists");
-            else clickCount++;
+            else
+            {
+                clickCount++;
+                doubleClick = false;
+            }
             if (clickCount == 1)
             {
                 positions.Clear();
@@ -64,13 +89,6 @@ public class PathFinding : MonoBehaviour
                 }
                 clickCount = 0;
             }
-        }
-
-        if (conmod.counter % 2 == 0)
-        {
-            positions.Clear();
-            clicked.Clear();
-            lineRenderer.positionCount = 0;
         }
 
     }

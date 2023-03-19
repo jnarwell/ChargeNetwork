@@ -18614,7 +18614,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233446239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb45864edd4d5ae47a1d8f597288e6dc, type: 3}
   m_Name: 
@@ -23316,7 +23316,6 @@ MonoBehaviour:
   dataText: {fileID: 0}
   close: {fileID: 0}
   open: {fileID: 0}
-  conmod: {fileID: 0}
   pathFinding: {fileID: 0}
   counter: 0
   anim: {fileID: 0}

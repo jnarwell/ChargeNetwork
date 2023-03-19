@@ -13,7 +13,7 @@ public class Connection_data : MonoBehaviour
     public Image close;
     public Image open;
 
-    public Connection_Mode_Change conmod;
+    //public Connection_Mode_Change conmod;
     public PathFinding pathFinding;
 
     public int counter;
@@ -42,7 +42,7 @@ public class Connection_data : MonoBehaviour
         stops = GameObject.Find("Stops").GetComponent<TMP_Text>();
 
         pathFinding = GameObject.Find("PathFinding").GetComponent<PathFinding>();
-        conmod = GameObject.Find("Connection Button").GetComponent<Connection_Mode_Change>();
+        //conmod = GameObject.Find("Connection Button").GetComponent<Connection_Mode_Change>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
         toggle = GetComponent<Toggle>();
@@ -54,28 +54,34 @@ public class Connection_data : MonoBehaviour
         tmpList.Add(time);
         tmpList.Add(cost);
         tmpList.Add(stops);
+
+        for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = true;
+        spriteRenderer.enabled = true;
+        borderSpriteRenderer.enabled = true;
+        open.enabled = true;
+        close.enabled = true;
     }
 
 
     private void Update()
     {
-        if (conmod.counter % 2 == 0)
-        {
-            for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = false;
-            spriteRenderer.enabled = false;
-            borderSpriteRenderer.enabled = false;
-            close.enabled = false;
-            open.enabled = false;
+        //if (conmod.counter % 2 == 0)
+        //{
+        //    for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = false;
+        //    spriteRenderer.enabled = false;
+        //    borderSpriteRenderer.enabled = false;
+        //    close.enabled = false;
+        //    open.enabled = false;
 
-        }
-        if (conmod.counter % 2 != 0)
-        {
-            for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = true;
-            spriteRenderer.enabled = true;
-            borderSpriteRenderer.enabled = true;
-            open.enabled = true;
-            close.enabled = true;   
-        }
+        //}
+        //if (conmod.counter % 2 != 0)
+        //{
+        //    for (int i = 0; i < tmpList.Count; i++) tmpList[i].enabled = true;
+        //    spriteRenderer.enabled = true;
+        //    borderSpriteRenderer.enabled = true;
+        //    open.enabled = true;
+        //    close.enabled = true;   
+        //}
 
         if (pathFinding.path != null)
         {
