@@ -12,12 +12,15 @@ public class Airport_Trigger : MonoBehaviour
     public Connection_Mode_Change conmod;
     public ToggleGroup toggleGroup;
     public int counter;
+    public PathFinding pathF;
 
     public Child_Info childInfo;
 
 
     private void Start()
     {
+        pathF = GameObject.FindGameObjectWithTag("path finder").GetComponent<PathFinding>();
+        
         counter = 0;
 
         childInfo = GetComponentInChildren<Child_Info>();
@@ -25,19 +28,23 @@ public class Airport_Trigger : MonoBehaviour
         toggleGroup = GetComponentInParent<ToggleGroup>();
         anim = gameObject.GetComponentInChildren<Animator>();
         onoff = GetComponent<Toggle>();
-        onoff.onValueChanged.AddListener(delegate
-        {
-            if (conmod.counter % 2 == 0)
-                userToggle(onoff);
-            else
-                onoff.isOn = false;
-        });
+        //onoff.onValueChanged.AddListener(delegate
+        //{
+        //    if (pathF.doubleClick==false)
+        //        userToggle(onoff);
+        //    else
+        //        onoff.isOn = false;
+        //});
 
     }
     private void Update()
     {
-        if (conmod.counter % 2 != 0 && counter % 2 != 0)
-            userToggle(onoff);
+
+        if (onoff.isOn==false && anim.GetCurrentAnimatorStateInfo(0).IsName("KBVT Text") && !anim.IsInTransition(0))
+        {
+            anim.SetTrigger("Active");
+        }
+
     }
 
     public void userToggle (bool tog)
@@ -46,13 +53,13 @@ public class Airport_Trigger : MonoBehaviour
         //childInfo.outline.sortingOrder = 9;
         childInfo.text.canvas.sortingOrder = 11;
         anim.SetTrigger("Active");
-        if (conmod.counter % 2 != 0 && counter % 2 != 0)
-        {
-            onoff.isOn = false;
-            childInfo.back.sortingOrder = 2;
-            childInfo.text.canvas.sortingOrder = 3;
-        }
-        counter += 1;
+        //if (conmod.counter % 2 != 0 && counter % 2 != 0)
+        //{
+        //    onoff.isOn = false;
+        //    childInfo.back.sortingOrder = 2;
+        //    childInfo.text.canvas.sortingOrder = 3;
+        //}
+        //counter += 1;
 
         //if (onoff.isOn == false)
         //{

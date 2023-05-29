@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Linq;
 using TMPro;
 
@@ -24,38 +25,66 @@ public class PathFinding : MonoBehaviour
 
     public TMP_Text text;
 
-    float doubleClickTime = .2f, lastClickTime;
-    bool doubleClick;
-
+    public bool doubleClick;
+    private float doubleClickTimeLimit = 0.25f;
+    private RaycastHit2D hit;
 
     private void Start()
     {
         sites.AddRange(GameObject.FindGameObjectsWithTag("site"));
         //lineRenderer = GetComponent<LineRenderer>();
         text.CrossFadeAlpha(0.0f, 0.0f, false);
+        StartCoroutine(InputListener());
+
+
     }
 
-    private void Update()
+
+    // Update is called once per frame
+    private IEnumerator InputListener()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            float timeSinceLastClick = Time.time - lastClickTime;
+        while (enabled)
+        { //Run as long as this is activ
 
-            if (timeSinceLastClick <= doubleClickTime)
-            {
-                Debug.Log("Double click");
-                doubleClick = true;
-            }
-            else
-            {
-                Debug.Log("Normal click");
-                //doubleClick = false;
-            }
+            if (Input.GetMouseButtonDown(0))
+                yield return ClickEvent();
 
-            lastClickTime = Time.time;
+            yield return null;
         }
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider && doubleClick && hit.collider.gameObject.tag == "site")
+    }
+
+    private IEnumerator ClickEvent()
+    {
+        //pause a frame so you don't pick up the same mouse down event.
+        yield return new WaitForEndOfFrame();
+
+        float count = 0f;
+        while (count < doubleClickTimeLimit)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                DoubleClick();
+                yield break;
+            }
+            count += Time.deltaTime;// increment counter by change in time between frames
+            yield return null; // wait for the next frame
+        }
+        SingleClick();
+    }
+
+
+    private void SingleClick()
+    {
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        Debug.Log("Single Click");
+        if (hit.collider && hit.collider.gameObject.tag == "site") hit.collider.gameObject.GetComponent<Airport_Trigger>().userToggle(hit.collider.gameObject.GetComponent<Airport_Trigger>().onoff);
+    }
+
+    private void DoubleClick()
+    {
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        Debug.Log("Double Click");
+        if (hit.collider && hit.collider.gameObject.tag == "site")
         {
             if (GameObject.Find("ALIA")) Debug.Log("ALIA Exists");
             else
@@ -90,8 +119,9 @@ public class PathFinding : MonoBehaviour
                 clickCount = 0;
             }
         }
-
     }
+
+
 
     public List<PathNode> FindPath()
     {

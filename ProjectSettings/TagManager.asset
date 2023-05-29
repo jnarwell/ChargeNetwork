@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Text
   - site
+  - path finder
   layers:
   - Default
   - TransparentFX
