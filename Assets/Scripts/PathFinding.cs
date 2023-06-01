@@ -19,15 +19,20 @@ public class PathFinding : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public List<Vector3> positions;
-    //public Connection_Mode_Change conmod;
 
     public List<PathNode> path;
 
     public TMP_Text text;
 
-    public bool doubleClick;
+    public Airport_Trigger last_hit;
+    public Connection_data con_data;
+
+    public bool singleClick;
     private float doubleClickTimeLimit = 0.25f;
     private RaycastHit2D hit;
+
+    private float timeLeft;
+    public Color targetColor;
 
     private void Start()
     {
@@ -36,10 +41,21 @@ public class PathFinding : MonoBehaviour
         text.CrossFadeAlpha(0.0f, 0.0f, false);
         StartCoroutine(InputListener());
 
-
+        con_data = GameObject.Find("Connection Data").GetComponent<Connection_data>();
+        con_data.gameObject.SetActive(false);
     }
 
-
+    private void Pulse()
+    {
+       clicked[0].gameObject.GetComponent<Airport_Trigger>().image_child.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+    }
+    private void Update()
+    {
+        if (clickCount == 1)
+        {
+            Pulse();
+        }
+    }
     // Update is called once per frame
     private IEnumerator InputListener()
     {
@@ -47,7 +63,10 @@ public class PathFinding : MonoBehaviour
         { //Run as long as this is activ
 
             if (Input.GetMouseButtonDown(0))
+            {
+                singleClick = false;
                 yield return ClickEvent();
+            }
 
             yield return null;
         }
@@ -77,11 +96,44 @@ public class PathFinding : MonoBehaviour
     {
         hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         Debug.Log("Single Click");
-        if (hit.collider && hit.collider.gameObject.tag == "site") hit.collider.gameObject.GetComponent<Airport_Trigger>().userToggle(hit.collider.gameObject.GetComponent<Airport_Trigger>().onoff);
+        singleClick = true;
+        if (hit.collider && hit.collider.gameObject.tag == "site")
+        {
+            Airport_Trigger this_hit = hit.collider.gameObject.GetComponent<Airport_Trigger>();
+            if (last_hit == null)
+            {
+                this_hit.userToggle(this_hit.onoff);
+                this_hit.onoff.isOn = true;
+            }
+            else if (this_hit == last_hit)
+            {
+                this_hit.userToggle(this_hit.onoff);
+                this_hit.onoff.isOn = false;
+            }
+            else
+            {
+                if (last_hit.text_child.transform.localPosition == new Vector3(3.04999995f, 1, last_hit.text_child.transform.localPosition.z) || last_hit.text_child.transform.localPosition == new Vector3(-3.04999995f, 1, last_hit.text_child.transform.localPosition.z))
+                {
+                    last_hit.userToggle(hit.collider.gameObject.GetComponent<Airport_Trigger>().onoff);
+                    last_hit.onoff.isOn = false;
+                    this_hit.userToggle(hit.collider.gameObject.GetComponent<Airport_Trigger>().onoff);
+                    this_hit.onoff.isOn = true;
+                }
+                else
+                {
+                    this_hit.userToggle(hit.collider.gameObject.GetComponent<Airport_Trigger>().onoff);
+                    this_hit.onoff.isOn = true;
+                }
+            }
+            last_hit = this_hit;
+            
+        }
+
     }
 
     private void DoubleClick()
     {
+        singleClick = false;
         hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         Debug.Log("Double Click");
         if (hit.collider && hit.collider.gameObject.tag == "site")
@@ -90,16 +142,18 @@ public class PathFinding : MonoBehaviour
             else
             {
                 clickCount++;
-                doubleClick = false;
             }
             if (clickCount == 1)
             {
                 positions.Clear();
                 clicked.Clear();
                 clicked.Add(hit.collider.gameObject.GetComponent<PathNode>());
+                lineRenderer.positionCount = 0;
+                con_data.gameObject.SetActive(false);
             }
             if (clickCount == 2)
             {
+                clicked[0].gameObject.GetComponent<Airport_Trigger>().image_child.color = Color.white;
                 clicked.Add(hit.collider.gameObject.GetComponent<PathNode>());
                 path = FindPath();
                 if (path != null)
@@ -107,6 +161,7 @@ public class PathFinding : MonoBehaviour
                     lineRenderer.positionCount = path.Count;
                     for (int i = 0; i < path.Count; i++) positions.Add(path[i].position);
                     lineRenderer.SetPositions(positions.ToArray());
+                    con_data.gameObject.SetActive(true);
                 }
                 else
                 {
@@ -115,13 +170,20 @@ public class PathFinding : MonoBehaviour
                     lineRenderer.positionCount = 0;
                     text.CrossFadeAlpha(881.0f, 1.00f, false);
                     text.CrossFadeAlpha(0.0f, 2.0f, false);
+                    con_data.gameObject.SetActive(false);
                 }
                 clickCount = 0;
             }
         }
     }
 
-
+    public void close()
+    {
+        positions.Clear();
+        clicked.Clear();
+        lineRenderer.positionCount = 0;
+        con_data.gameObject.SetActive(false);
+    }
 
     public List<PathNode> FindPath()
     {
@@ -181,9 +243,11 @@ public class PathFinding : MonoBehaviour
     {
         List<PathNode> neighborList = new List<PathNode>();
 
+        //current distance conversion 1 unit = 0.00651 miles
+
         for (int i = 0; i < sites.Count; i++)
         {
-            if (CalculateDistanceCost(pathNode, sites[i].GetComponent<PathNode>()) < 1.58995) neighborList.Add(sites[i].GetComponent<PathNode>());
+            if (CalculateDistanceCost(pathNode, sites[i].GetComponent<PathNode>()) < 0.00651*375) neighborList.Add(sites[i].GetComponent<PathNode>());
         }
 
         return neighborList;
